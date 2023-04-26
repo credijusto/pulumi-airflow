@@ -1,0 +1,432 @@
+{
+    "name": "airflow",
+    "description": "A Pulumi package for creating and managing airflow cloud resources.",
+    "keywords": [
+        "pulumi",
+        "airflow",
+        "apache/airflow",
+        "dags"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`airflow` Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow).",
+    "repository": "https://github.com/pulumi/pulumi-airflow",
+    "publisher": "Marco Antonio Ojeda De Pablo",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/pulumi/pulumi-airflow/sdk/go/airflow"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing airflow cloud resources.",
+            "packageName": "",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-airflow` repo](https://github.com/pulumi/pulumi-airflow/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-airflow` repo](https://github.com/drfaust92/terraform-provider-airflow/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-airflow` repo](https://github.com/pulumi/pulumi-airflow/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-airflow` repo](https://github.com/drfaust92/terraform-provider-airflow/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "baseEndpoint": {
+                "type": "string"
+            },
+            "oauth2Token": {
+                "type": "string",
+                "description": "The oauth to use for API authentication\n"
+            },
+            "password": {
+                "type": "string",
+                "description": "The password to use for API basic authentication\n"
+            },
+            "username": {
+                "type": "string",
+                "description": "The username to use for API basic authentication\n"
+            }
+        },
+        "defaults": [
+            "baseEndpoint"
+        ]
+    },
+    "provider": {
+        "description": "The provider type for the airflow package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "baseEndpoint": {
+                "type": "string"
+            },
+            "oauth2Token": {
+                "type": "string",
+                "description": "The oauth to use for API authentication\n"
+            },
+            "password": {
+                "type": "string",
+                "description": "The password to use for API basic authentication\n"
+            },
+            "username": {
+                "type": "string",
+                "description": "The username to use for API basic authentication\n"
+            }
+        },
+        "required": [
+            "baseEndpoint"
+        ],
+        "inputProperties": {
+            "baseEndpoint": {
+                "type": "string"
+            },
+            "oauth2Token": {
+                "type": "string",
+                "description": "The oauth to use for API authentication\n"
+            },
+            "password": {
+                "type": "string",
+                "description": "The password to use for API basic authentication\n"
+            },
+            "username": {
+                "type": "string",
+                "description": "The username to use for API basic authentication\n"
+            }
+        },
+        "requiredInputs": [
+            "baseEndpoint"
+        ]
+    },
+    "resources": {
+        "airflow:index/connection:Connection": {
+            "description": "Provides an Airflow connection.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Connection(\"example\", {\n    connType: \"example\",\n    connectionId: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Connection(\"example\",\n    conn_type=\"example\",\n    connection_id=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Connection(\"example\", new()\n    {\n        ConnType = \"example\",\n        ConnectionId = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewConnection(ctx, \"example\", \u0026airflow.ConnectionArgs{\n\t\t\tConnType:     pulumi.String(\"example\"),\n\t\t\tConnectionId: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Connection;\nimport com.pulumi.airflow.ConnectionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Connection(\"example\", ConnectionArgs.builder()        \n            .connType(\"example\")\n            .connectionId(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Connection\n    properties:\n      connType: example\n      connectionId: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConnections can be imported using the connection key. terraform\n\n```sh\n $ pulumi import airflow:index/connection:Connection default example\n```\n\n ",
+            "properties": {
+                "connType": {
+                    "type": "string",
+                    "description": "The connection type.\n"
+                },
+                "connectionId": {
+                    "type": "string",
+                    "description": "The connection ID.\n"
+                },
+                "extra": {
+                    "type": "string",
+                    "description": "Other values that cannot be put into another field, e.g. RSA keys.\n"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "The host of the connection.\n"
+                },
+                "login": {
+                    "type": "string",
+                    "description": "The login of the connection.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The paasword of the connection.\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "The port of the connection.\n"
+                },
+                "schema": {
+                    "type": "string",
+                    "description": "The schema of the connection.\n"
+                }
+            },
+            "required": [
+                "connType",
+                "connectionId"
+            ],
+            "inputProperties": {
+                "connType": {
+                    "type": "string",
+                    "description": "The connection type.\n"
+                },
+                "connectionId": {
+                    "type": "string",
+                    "description": "The connection ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "extra": {
+                    "type": "string",
+                    "description": "Other values that cannot be put into another field, e.g. RSA keys.\n"
+                },
+                "host": {
+                    "type": "string",
+                    "description": "The host of the connection.\n"
+                },
+                "login": {
+                    "type": "string",
+                    "description": "The login of the connection.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The paasword of the connection.\n"
+                },
+                "port": {
+                    "type": "integer",
+                    "description": "The port of the connection.\n"
+                },
+                "schema": {
+                    "type": "string",
+                    "description": "The schema of the connection.\n"
+                }
+            },
+            "requiredInputs": [
+                "connType",
+                "connectionId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Connection resources.\n",
+                "properties": {
+                    "connType": {
+                        "type": "string",
+                        "description": "The connection type.\n"
+                    },
+                    "connectionId": {
+                        "type": "string",
+                        "description": "The connection ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "extra": {
+                        "type": "string",
+                        "description": "Other values that cannot be put into another field, e.g. RSA keys.\n"
+                    },
+                    "host": {
+                        "type": "string",
+                        "description": "The host of the connection.\n"
+                    },
+                    "login": {
+                        "type": "string",
+                        "description": "The login of the connection.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The paasword of the connection.\n"
+                    },
+                    "port": {
+                        "type": "integer",
+                        "description": "The port of the connection.\n"
+                    },
+                    "schema": {
+                        "type": "string",
+                        "description": "The schema of the connection.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "airflow:index/dag:Dag": {
+            "description": "Provides an Airflow DAG.\n\n\u003e Note this resource adpots an existing DAG and does not create a one, Also on delete the resource by default. A DAG is only deleted from state and not acutally deleted.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Dag(\"example\", {\n    dagId: \"example\",\n    isPaused: false,\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Dag(\"example\",\n    dag_id=\"example\",\n    is_paused=False)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Dag(\"example\", new()\n    {\n        DagId = \"example\",\n        IsPaused = false,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewDag(ctx, \"example\", \u0026airflow.DagArgs{\n\t\t\tDagId:    pulumi.String(\"example\"),\n\t\t\tIsPaused: pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Dag;\nimport com.pulumi.airflow.DagArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Dag(\"example\", DagArgs.builder()        \n            .dagId(\"example\")\n            .isPaused(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Dag\n    properties:\n      dagId: example\n      isPaused: false\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nDAGs can be imported using the DAG Id. terraform\n\n```sh\n $ pulumi import airflow:index/dag:Dag default example\n```\n\n ",
+            "properties": {
+                "dagId": {
+                    "type": "string",
+                    "description": "The ID of the DAG.\n"
+                },
+                "deleteDag": {
+                    "type": "boolean"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "User-provided DAG description, which can consist of several sentences or paragraphs that describe DAG contents.\n"
+                },
+                "fileToken": {
+                    "type": "string",
+                    "description": "The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file.\n"
+                },
+                "fileloc": {
+                    "type": "string",
+                    "description": "The absolute path to the file.\n"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "description": "Whether the DAG is currently seen by the scheduler(s).\n"
+                },
+                "isPaused": {
+                    "type": "boolean",
+                    "description": "Whether the DAG is paused.\n"
+                },
+                "isSubdag": {
+                    "type": "boolean",
+                    "description": "Whether the DAG is SubDAG.\n"
+                },
+                "rootDagId": {
+                    "type": "string",
+                    "description": "If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.\n"
+                }
+            },
+            "required": [
+                "dagId",
+                "description",
+                "fileToken",
+                "fileloc",
+                "isActive",
+                "isPaused",
+                "isSubdag",
+                "rootDagId"
+            ],
+            "inputProperties": {
+                "dagId": {
+                    "type": "string",
+                    "description": "The ID of the DAG.\n",
+                    "willReplaceOnChanges": true
+                },
+                "deleteDag": {
+                    "type": "boolean"
+                },
+                "isPaused": {
+                    "type": "boolean",
+                    "description": "Whether the DAG is paused.\n"
+                }
+            },
+            "requiredInputs": [
+                "dagId",
+                "isPaused"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Dag resources.\n",
+                "properties": {
+                    "dagId": {
+                        "type": "string",
+                        "description": "The ID of the DAG.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "deleteDag": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "User-provided DAG description, which can consist of several sentences or paragraphs that describe DAG contents.\n"
+                    },
+                    "fileToken": {
+                        "type": "string",
+                        "description": "The key containing the encrypted path to the file. Encryption and decryption take place only on the server. This prevents the client from reading an non-DAG file.\n"
+                    },
+                    "fileloc": {
+                        "type": "string",
+                        "description": "The absolute path to the file.\n"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "Whether the DAG is currently seen by the scheduler(s).\n"
+                    },
+                    "isPaused": {
+                        "type": "boolean",
+                        "description": "Whether the DAG is paused.\n"
+                    },
+                    "isSubdag": {
+                        "type": "boolean",
+                        "description": "Whether the DAG is SubDAG.\n"
+                    },
+                    "rootDagId": {
+                        "type": "string",
+                        "description": "If the DAG is SubDAG then it is the top level DAG identifier. Otherwise, null.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "airflow:index/pool:Pool": {
+            "description": "Provides an Airflow pool.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Pool(\"example\", {\n    slots: 2,\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Pool(\"example\", slots=2)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Pool(\"example\", new()\n    {\n        Slots = 2,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/pulumi/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewPool(ctx, \"example\", \u0026airflow.PoolArgs{\n\t\t\tSlots: pulumi.Int(2),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Pool;\nimport com.pulumi.airflow.PoolArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Pool(\"example\", PoolArgs.builder()        \n            .slots(2)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Pool\n    properties:\n      slots: 2\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nPools can be imported using the pool name. terraform\n\n```sh\n $ pulumi import airflow:index/pool:Pool default example\n```\n\n ",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of pool.\n"
+                },
+                "occupiedSlots": {
+                    "type": "integer",
+                    "description": "The number of slots used by running/queued tasks at the moment.\n"
+                },
+                "openSlots": {
+                    "type": "integer",
+                    "description": "The number of free slots at the moment.\n"
+                },
+                "queuedSlots": {
+                    "type": "integer",
+                    "description": "The number of slots used by queued tasks at the moment.\n"
+                },
+                "slots": {
+                    "type": "integer",
+                    "description": "The maximum number of slots that can be assigned to tasks. One job may occupy one or more slots.\n"
+                },
+                "usedSlots": {
+                    "type": "integer",
+                    "description": "The number of slots used by running tasks at the moment.\n"
+                }
+            },
+            "required": [
+                "name",
+                "occupiedSlots",
+                "openSlots",
+                "queuedSlots",
+                "slots",
+                "usedSlots"
+            ],
+            "inputProperties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of pool.\n",
+                    "willReplaceOnChanges": true
+                },
+                "slots": {
+                    "type": "integer",
+                    "description": "The maximum number of slots that can be assigned to tasks. One job may occupy one or more slots.\n"
+                }
+            },
+            "requiredInputs": [
+                "slots"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Pool resources.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of pool.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "occupiedSlots": {
+                        "type": "integer",
+                        "description": "The number of slots used by running/queued tasks at the moment.\n"
+                    },
+                    "openSlots": {
+                        "type": "integer",
+                        "description": "The number of free slots at the moment.\n"
+                    },
+                    "queuedSlots": {
+                        "type": "integer",
+                        "description": "The number of slots used by queued tasks at the moment.\n"
+                    },
+                    "slots": {
+                        "type": "integer",
+                        "description": "The maximum number of slots that can be assigned to tasks. One job may occupy one or more slots.\n"
+                    },
+                    "usedSlots": {
+                        "type": "integer",
+                        "description": "The number of slots used by running tasks at the moment.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
