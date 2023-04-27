@@ -9,7 +9,7 @@
         "dags"
     ],
     "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumi/pulumi-airflow",
+    "repository": "https://github.com/Hellthrashers/pulumi-airflow",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",
