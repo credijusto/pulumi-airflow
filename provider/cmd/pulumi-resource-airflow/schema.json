@@ -10,7 +10,7 @@
     "homepage": "https://www.pulumi.com",
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`airflow` Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow).",
-    "repository": "https://github.com/pulumi/pulumi-airflow",
+    "repository": "https://github.com/Hellthrashers/pulumi-airflow",
     "publisher": "Marco Antonio Ojeda De Pablo",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
