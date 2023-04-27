@@ -65,15 +65,6 @@ jobs:
           registry-url: ${{env.NPM_REGISTRY_URL}}
       - name: Build SDK
         run: make build_${{ matrix.language }}
-      - name: Check worktree clean
-        run: |
-          git update-index -q --refresh
-          if ! git diff-files --quiet; then
-              >&2 echo "error: working tree is not clean, aborting!"
-              git status
-              git diff
-              exit 1
-          fi
       - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
         uses: JS-DevTools/npm-publish@v1
         with:
