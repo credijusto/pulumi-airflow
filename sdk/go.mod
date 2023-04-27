@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-airflow/sdk
+module github.com/Hellthrashers/pulumi-airflow/sdk
 
 go 1.17
 
