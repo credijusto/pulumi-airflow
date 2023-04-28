@@ -46,9 +46,9 @@ setup(name='pulumi_airflow',
           'install': InstallPluginCommand,
       },
       keywords='pulumi airflow apache/airflow dags',
-      url='https://www.pulumi.com',
+      url='https://github.com/Hellthrashsers/pulumi-airflow',
       project_urls={
-          'Repository': 'https://github.com/pulumi/pulumi-airflow'
+          'Repository': 'https://github.com/Hellthrashsers/pulumi-airflow'
       },
       license='Apache-2.0',
       packages=find_packages(),

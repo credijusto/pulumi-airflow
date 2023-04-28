@@ -22,7 +22,7 @@ import (
 //
 // import (
 //
-//	"github.com/pulumi/pulumi-airflow/sdk/go/airflow"
+//	"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )

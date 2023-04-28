@@ -56,8 +56,8 @@ func Provider() tfbridge.ProviderInfo {
 		Description:          "A Pulumi package for creating and managing airflow cloud resources.",
 		Keywords:             []string{"pulumi", "airflow", "apache/airflow", "dags"},
 		License:              "Apache-2.0",
-		Homepage:             "https://www.pulumi.com",
-		Repository:           "https://github.com/pulumi/pulumi-airflow",
+		Homepage:             "https://github.com/Hellthrashsers/pulumi-airflow",
+		Repository:           "https://github.com/Hellthrashsers/pulumi-airflow",
 		GitHubOrg:            "drfaust92",
 		Config:               map[string]*tfbridge.SchemaInfo{},
 		PreConfigureCallback: preConfigureCallback,
@@ -68,6 +68,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 
 		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "pulumi-airflow",
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
@@ -89,7 +90,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		Golang: &tfbridge.GolangInfo{
 			ImportBasePath: filepath.Join(
-				fmt.Sprintf("github.com/pulumi/pulumi-%[1]s/sdk/", mainPkg),
+				fmt.Sprintf("github.com/Hellthrashers/pulumi-%[1]s/sdk/", mainPkg),
 				tfbridge.GetModuleMajorVersion(version.Version),
 				"go",
 				mainPkg,
