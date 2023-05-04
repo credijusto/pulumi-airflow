@@ -8,8 +8,8 @@
         "apache/airflow",
         "dags"
     ],
-    "homepage": "https://github.com/Hellthrashsers/pulumi-airflow",
-    "repository": "https://github.com/Hellthrashsers/pulumi-airflow",
+    "homepage": "https://github.com/Hellthrashers/pulumi-airflow",
+    "repository": "https://github.com/Hellthrashers/pulumi-airflow",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc",

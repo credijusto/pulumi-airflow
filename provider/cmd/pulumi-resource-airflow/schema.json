@@ -7,10 +7,10 @@
         "apache/airflow",
         "dags"
     ],
-    "homepage": "https://github.com/Hellthrashsers/pulumi-airflow",
+    "homepage": "https://github.com/Hellthrashers/pulumi-airflow",
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`airflow` Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow).",
-    "repository": "https://github.com/Hellthrashsers/pulumi-airflow",
+    "repository": "https://github.com/Hellthrashers/pulumi-airflow",
     "publisher": "Marco Antonio Ojeda De Pablo",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
@@ -40,12 +40,12 @@
             "disableUnionOutputTypes": true,
             "packageDescription": "A Pulumi package for creating and managing airflow cloud resources.",
             "packageName": "pulumi-airflow",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-airflow` repo](https://github.com/Hellthrashsers/pulumi-airflow/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-airflow` repo](https://github.com/drfaust92/terraform-provider-airflow/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-airflow` repo](https://github.com/Hellthrashers/pulumi-airflow/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-airflow` repo](https://github.com/drfaust92/terraform-provider-airflow/issues).",
             "typescriptVersion": ""
         },
         "python": {
             "compatibility": "tfbridge20",
-            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-airflow` repo](https://github.com/Hellthrashsers/pulumi-airflow/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-airflow` repo](https://github.com/drfaust92/terraform-provider-airflow/issues).",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/drfaust92/terraform-provider-airflow)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-airflow` repo](https://github.com/Hellthrashers/pulumi-airflow/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-airflow` repo](https://github.com/drfaust92/terraform-provider-airflow/issues).",
             "requires": {
                 "pulumi": "\u003e=3.0.0,\u003c4.0.0"
             }
