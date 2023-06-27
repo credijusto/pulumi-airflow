@@ -56,6 +56,8 @@ type Connection struct {
 	ConnType pulumi.StringOutput `pulumi:"connType"`
 	// The connection ID.
 	ConnectionId pulumi.StringOutput `pulumi:"connectionId"`
+	// The description of the connection.
+	Description pulumi.StringPtrOutput `pulumi:"description"`
 	// Other values that cannot be put into another field, e.g. RSA keys.
 	Extra pulumi.StringPtrOutput `pulumi:"extra"`
 	// The host of the connection.
@@ -109,6 +111,8 @@ type connectionState struct {
 	ConnType *string `pulumi:"connType"`
 	// The connection ID.
 	ConnectionId *string `pulumi:"connectionId"`
+	// The description of the connection.
+	Description *string `pulumi:"description"`
 	// Other values that cannot be put into another field, e.g. RSA keys.
 	Extra *string `pulumi:"extra"`
 	// The host of the connection.
@@ -128,6 +132,8 @@ type ConnectionState struct {
 	ConnType pulumi.StringPtrInput
 	// The connection ID.
 	ConnectionId pulumi.StringPtrInput
+	// The description of the connection.
+	Description pulumi.StringPtrInput
 	// Other values that cannot be put into another field, e.g. RSA keys.
 	Extra pulumi.StringPtrInput
 	// The host of the connection.
@@ -151,6 +157,8 @@ type connectionArgs struct {
 	ConnType string `pulumi:"connType"`
 	// The connection ID.
 	ConnectionId string `pulumi:"connectionId"`
+	// The description of the connection.
+	Description *string `pulumi:"description"`
 	// Other values that cannot be put into another field, e.g. RSA keys.
 	Extra *string `pulumi:"extra"`
 	// The host of the connection.
@@ -171,6 +179,8 @@ type ConnectionArgs struct {
 	ConnType pulumi.StringInput
 	// The connection ID.
 	ConnectionId pulumi.StringInput
+	// The description of the connection.
+	Description pulumi.StringPtrInput
 	// Other values that cannot be put into another field, e.g. RSA keys.
 	Extra pulumi.StringPtrInput
 	// The host of the connection.
@@ -280,6 +290,11 @@ func (o ConnectionOutput) ConnType() pulumi.StringOutput {
 // The connection ID.
 func (o ConnectionOutput) ConnectionId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Connection) pulumi.StringOutput { return v.ConnectionId }).(pulumi.StringOutput)
+}
+
+// The description of the connection.
+func (o ConnectionOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Connection) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
 // Other values that cannot be put into another field, e.g. RSA keys.

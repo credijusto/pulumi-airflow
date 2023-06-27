@@ -12,6 +12,11 @@ func GetBaseEndpoint(ctx *pulumi.Context) string {
 	return config.Get(ctx, "airflow:baseEndpoint")
 }
 
+// Disable SSL verification
+func GetDisableSslVerification(ctx *pulumi.Context) bool {
+	return config.GetBool(ctx, "airflow:disableSslVerification")
+}
+
 // The oauth to use for API authentication
 func GetOauth2Token(ctx *pulumi.Context) string {
 	return config.Get(ctx, "airflow:oauth2Token")

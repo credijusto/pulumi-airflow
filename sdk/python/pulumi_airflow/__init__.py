@@ -9,6 +9,11 @@ from .connection import *
 from .dag import *
 from .pool import *
 from .provider import *
+from .role import *
+from .user import *
+from .variable import *
+from ._inputs import *
+from . import outputs
 
 # Make subpackages available:
 if typing.TYPE_CHECKING:
@@ -42,6 +47,30 @@ _utilities.register(
   "fqn": "pulumi_airflow",
   "classes": {
    "airflow:index/pool:Pool": "Pool"
+  }
+ },
+ {
+  "pkg": "airflow",
+  "mod": "index/role",
+  "fqn": "pulumi_airflow",
+  "classes": {
+   "airflow:index/role:Role": "Role"
+  }
+ },
+ {
+  "pkg": "airflow",
+  "mod": "index/user",
+  "fqn": "pulumi_airflow",
+  "classes": {
+   "airflow:index/user:User": "User"
+  }
+ },
+ {
+  "pkg": "airflow",
+  "mod": "index/variable",
+  "fqn": "pulumi_airflow",
+  "classes": {
+   "airflow:index/variable:Variable": "Variable"
   }
  }
 ]

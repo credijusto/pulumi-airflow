@@ -9,18 +9,26 @@ export * from "./connection";
 export * from "./dag";
 export * from "./pool";
 export * from "./provider";
+export * from "./role";
+export * from "./user";
+export * from "./variable";
 
 // Export sub-modules:
 import * as config from "./config";
+import * as types from "./types";
 
 export {
     config,
+    types,
 };
 
 // Import resources to register:
 import { Connection } from "./connection";
 import { Dag } from "./dag";
 import { Pool } from "./pool";
+import { Role } from "./role";
+import { User } from "./user";
+import { Variable } from "./variable";
 
 const _module = {
     version: utilities.getVersion(),
@@ -32,6 +40,12 @@ const _module = {
                 return new Dag(name, <any>undefined, { urn })
             case "airflow:index/pool:Pool":
                 return new Pool(name, <any>undefined, { urn })
+            case "airflow:index/role:Role":
+                return new Role(name, <any>undefined, { urn })
+            case "airflow:index/user:User":
+                return new User(name, <any>undefined, { urn })
+            case "airflow:index/variable:Variable":
+                return new Variable(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -40,6 +54,9 @@ const _module = {
 pulumi.runtime.registerResourceModule("airflow", "index/connection", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/dag", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/pool", _module)
+pulumi.runtime.registerResourceModule("airflow", "index/role", _module)
+pulumi.runtime.registerResourceModule("airflow", "index/user", _module)
+pulumi.runtime.registerResourceModule("airflow", "index/variable", _module)
 
 import { Provider } from "./provider";
 

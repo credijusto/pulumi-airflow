@@ -26,6 +26,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Dag{}
 	case "airflow:index/pool:Pool":
 		r = &Pool{}
+	case "airflow:index/role:Role":
+		r = &Role{}
+	case "airflow:index/user:User":
+		r = &User{}
+	case "airflow:index/variable:Variable":
+		r = &Variable{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -67,6 +73,21 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"airflow",
 		"index/pool",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"airflow",
+		"index/role",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"airflow",
+		"index/user",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"airflow",
+		"index/variable",
 		&module{version},
 	)
 	pulumi.RegisterResourcePackage(

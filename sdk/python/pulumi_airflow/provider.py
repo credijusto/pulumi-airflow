@@ -15,16 +15,20 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  base_endpoint: pulumi.Input[str],
+                 disable_ssl_verification: Optional[pulumi.Input[bool]] = None,
                  oauth2_token: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
+        :param pulumi.Input[bool] disable_ssl_verification: Disable SSL verification
         :param pulumi.Input[str] oauth2_token: The oauth to use for API authentication
         :param pulumi.Input[str] password: The password to use for API basic authentication
         :param pulumi.Input[str] username: The username to use for API basic authentication
         """
         pulumi.set(__self__, "base_endpoint", base_endpoint)
+        if disable_ssl_verification is not None:
+            pulumi.set(__self__, "disable_ssl_verification", disable_ssl_verification)
         if oauth2_token is not None:
             pulumi.set(__self__, "oauth2_token", oauth2_token)
         if password is not None:
@@ -40,6 +44,18 @@ class ProviderArgs:
     @base_endpoint.setter
     def base_endpoint(self, value: pulumi.Input[str]):
         pulumi.set(self, "base_endpoint", value)
+
+    @property
+    @pulumi.getter(name="disableSslVerification")
+    def disable_ssl_verification(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Disable SSL verification
+        """
+        return pulumi.get(self, "disable_ssl_verification")
+
+    @disable_ssl_verification.setter
+    def disable_ssl_verification(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "disable_ssl_verification", value)
 
     @property
     @pulumi.getter(name="oauth2Token")
@@ -84,6 +100,7 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  base_endpoint: Optional[pulumi.Input[str]] = None,
+                 disable_ssl_verification: Optional[pulumi.Input[bool]] = None,
                  oauth2_token: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None,
@@ -96,6 +113,7 @@ class Provider(pulumi.ProviderResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[bool] disable_ssl_verification: Disable SSL verification
         :param pulumi.Input[str] oauth2_token: The oauth to use for API authentication
         :param pulumi.Input[str] password: The password to use for API basic authentication
         :param pulumi.Input[str] username: The username to use for API basic authentication
@@ -128,6 +146,7 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  base_endpoint: Optional[pulumi.Input[str]] = None,
+                 disable_ssl_verification: Optional[pulumi.Input[bool]] = None,
                  oauth2_token: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  username: Optional[pulumi.Input[str]] = None,
@@ -143,6 +162,7 @@ class Provider(pulumi.ProviderResource):
             if base_endpoint is None and not opts.urn:
                 raise TypeError("Missing required property 'base_endpoint'")
             __props__.__dict__["base_endpoint"] = base_endpoint
+            __props__.__dict__["disable_ssl_verification"] = pulumi.Output.from_input(disable_ssl_verification).apply(pulumi.runtime.to_json) if disable_ssl_verification is not None else None
             __props__.__dict__["oauth2_token"] = oauth2_token
             __props__.__dict__["password"] = password
             __props__.__dict__["username"] = username

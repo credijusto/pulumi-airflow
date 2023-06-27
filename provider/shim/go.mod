@@ -3,7 +3,7 @@ module github.com/drfaust92/terraform-provider-airflow/shim
 go 1.18
 
 require (
-	github.com/drfaust92/terraform-provider-airflow v0.12.4
+	github.com/drfaust92/terraform-provider-airflow v0.13.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.1
 )
 

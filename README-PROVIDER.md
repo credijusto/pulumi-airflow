@@ -1,56 +1,61 @@
-# Foo Resource Provider
+# Apache airflow provider
 
-The Foo Resource Provider lets you manage [Foo](http://example.com) resources.
+This code defines a Pulumi provider resource for the Airflow package.
 
-## Installing
+## Installation
 
-This package is available for several languages/platforms:
+This package is available for Node.js (JavaScript/TypeScript):
 
-### Node.js (JavaScript/TypeScript)
+To use from JavaScript or TypeScript in Node.js, install using either npm:
 
-To use from JavaScript or TypeScript in Node.js, install using either `npm`:
-
-```bash
-npm install @pulumi/foo
+```
+npm i pulumi-airflow
 ```
 
-or `yarn`:
+## Provider and Arguments
 
-```bash
-yarn add @pulumi/foo
+The `Provider` resource accepts the following arguments:
+
+- `baseEndpoint`: (Required) The base endpoint URL for the API.
+- `oauth2Token`: (Optional) The oauth token to use for API authentication.
+- `password`: (Optional) The password to use for API basic authentication.
+- `username`: (Optional) The username to use for API basic authentication.
+
+These arguments can be passed as an object of type `ProviderArgs` to the `Provider` constructor.
+
+## Example set provider with Node.js (JavaScript/TypeScript)
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as airflow from "@pulumi/airflow";
+
+const myProvider = new airflow.Provider("my-provider", {
+    baseEndpoint: "https://my-airflow-instance/api/v1",
+    oauth2Token: "my-token",
+    username: "my-username",
+    password: "my-password",
+});
+
+// Use `myProvider` to create resources in your Pulumi program.
 ```
 
-### Python
 
-To use from Python, install using `pip`:
+## Example Usage for set resoruce connection with Node.js (JavaScript/TypeScript)
 
-```bash
-pip install pulumi_foo
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as airflow from "@pulumi/airflow";
+
+const example = new airflow.Connection("example", {
+    connType: "example",
+    connectionId: "example",
+});
 ```
 
-### Go
+## Import
 
-To use from Go, use `go get` to grab the latest version of the library:
+Connections can be imported using the connection key. terraform
 
-```bash
-go get github.com/pulumi/pulumi-foo/sdk/go/...
+```sh
+ $ pulumi import airflow:index/connection:Connection default example
 ```
-
-### .NET
-
-To use from .NET, install using `dotnet add package`:
-
-```bash
-dotnet add package Pulumi.Foo
-```
-
-## Configuration
-
-The following configuration points are available for the `foo` provider:
-
-- `foo:apiKey` (environment: `FOO_API_KEY`) - the API key for `foo`
-- `foo:region` (environment: `FOO_REGION`) - the region in which to deploy resources
-
-## Reference
-
-For detailed reference documentation, please visit [the Pulumi registry](https://www.pulumi.com/registry/packages/foo/api-docs/).

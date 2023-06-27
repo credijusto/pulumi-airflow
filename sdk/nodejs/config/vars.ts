@@ -16,6 +16,17 @@ Object.defineProperty(exports, "baseEndpoint", {
 });
 
 /**
+ * Disable SSL verification
+ */
+export declare const disableSslVerification: boolean | undefined;
+Object.defineProperty(exports, "disableSslVerification", {
+    get() {
+        return __config.getObject<boolean>("disableSslVerification");
+    },
+    enumerable: true,
+});
+
+/**
  * The oauth to use for API authentication
  */
 export declare const oauth2Token: string | undefined;

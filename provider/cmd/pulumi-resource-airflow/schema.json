@@ -56,6 +56,10 @@
             "baseEndpoint": {
                 "type": "string"
             },
+            "disableSslVerification": {
+                "type": "boolean",
+                "description": "Disable SSL verification\n"
+            },
             "oauth2Token": {
                 "type": "string",
                 "description": "The oauth to use for API authentication\n"
@@ -73,11 +77,44 @@
             "baseEndpoint"
         ]
     },
+    "types": {
+        "airflow:index/RoleAction:RoleAction": {
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The name of the permission.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "resource": {
+                    "type": "string",
+                    "description": "The name of the resource.\n",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "action",
+                "resource"
+            ]
+        }
+    },
     "provider": {
         "description": "The provider type for the airflow package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
         "properties": {
             "baseEndpoint": {
                 "type": "string"
+            },
+            "disableSslVerification": {
+                "type": "boolean",
+                "description": "Disable SSL verification\n"
             },
             "oauth2Token": {
                 "type": "string",
@@ -98,6 +135,10 @@
         "inputProperties": {
             "baseEndpoint": {
                 "type": "string"
+            },
+            "disableSslVerification": {
+                "type": "boolean",
+                "description": "Disable SSL verification\n"
             },
             "oauth2Token": {
                 "type": "string",
@@ -127,6 +168,10 @@
                 "connectionId": {
                     "type": "string",
                     "description": "The connection ID.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the connection.\n"
                 },
                 "extra": {
                     "type": "string",
@@ -166,6 +211,10 @@
                     "type": "string",
                     "description": "The connection ID.\n",
                     "willReplaceOnChanges": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the connection.\n"
                 },
                 "extra": {
                     "type": "string",
@@ -207,6 +256,10 @@
                         "type": "string",
                         "description": "The connection ID.\n",
                         "willReplaceOnChanges": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the connection.\n"
                     },
                     "extra": {
                         "type": "string",
@@ -423,6 +476,249 @@
                     "usedSlots": {
                         "type": "integer",
                         "description": "The number of slots used by running tasks at the moment.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "airflow:index/role:Role": {
+            "description": "Provides an Airflow role.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Role(\"example\", {\n    actions: [{\n        action: \"can_read\",\n        resource: \"Audit Logs\",\n    }],\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Role(\"example\", actions=[airflow.RoleActionArgs(\n    action=\"can_read\",\n    resource=\"Audit Logs\",\n)])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Role(\"example\", new()\n    {\n        Actions = new[]\n        {\n            new Airflow.Inputs.RoleActionArgs\n            {\n                Action = \"can_read\",\n                Resource = \"Audit Logs\",\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewRole(ctx, \"example\", \u0026airflow.RoleArgs{\n\t\t\tActions: RoleActionArray{\n\t\t\t\t\u0026RoleActionArgs{\n\t\t\t\t\tAction:   pulumi.String(\"can_read\"),\n\t\t\t\t\tResource: pulumi.String(\"Audit Logs\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Role;\nimport com.pulumi.airflow.RoleArgs;\nimport com.pulumi.airflow.inputs.RoleActionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Role(\"example\", RoleArgs.builder()        \n            .actions(RoleActionArgs.builder()\n                .action(\"can_read\")\n                .resource(\"Audit Logs\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Role\n    properties:\n      actions:\n        - action: can_read\n          resource: Audit Logs\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nRoles can be imported using the role key. terraform\n\n```sh\n $ pulumi import airflow:index/role:Role default example\n```\n\n ",
+            "properties": {
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/airflow:index/RoleAction:RoleAction"
+                    },
+                    "description": "The name of the permission.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the role\n"
+                }
+            },
+            "required": [
+                "actions",
+                "name"
+            ],
+            "inputProperties": {
+                "actions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/airflow:index/RoleAction:RoleAction"
+                    },
+                    "description": "The name of the permission.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the role\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "actions"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Role resources.\n",
+                "properties": {
+                    "actions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/airflow:index/RoleAction:RoleAction"
+                        },
+                        "description": "The name of the permission.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the role\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "airflow:index/user:User": {
+            "description": "Provides an Airflow user.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as pulumi_airflow from \"pulumi-airflow\";\n\nconst example = new airflow.User(\"example\", {\n    email: \"example\",\n    firstName: \"example\",\n    lastName: \"example\",\n    username: \"example\",\n    password: \"example\",\n    roles: [airflow_role.example.name],\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.User(\"example\",\n    email=\"example\",\n    first_name=\"example\",\n    last_name=\"example\",\n    username=\"example\",\n    password=\"example\",\n    roles=[airflow_role[\"example\"][\"name\"]])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.User(\"example\", new()\n    {\n        Email = \"example\",\n        FirstName = \"example\",\n        LastName = \"example\",\n        Username = \"example\",\n        Password = \"example\",\n        Roles = new[]\n        {\n            airflow_role.Example.Name,\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewUser(ctx, \"example\", \u0026airflow.UserArgs{\n\t\t\tEmail:     pulumi.String(\"example\"),\n\t\t\tFirstName: pulumi.String(\"example\"),\n\t\t\tLastName:  pulumi.String(\"example\"),\n\t\t\tUsername:  pulumi.String(\"example\"),\n\t\t\tPassword:  pulumi.String(\"example\"),\n\t\t\tRoles: pulumi.StringArray{\n\t\t\t\tpulumi.Any(airflow_role.Example.Name),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.User;\nimport com.pulumi.airflow.UserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new User(\"example\", UserArgs.builder()        \n            .email(\"example\")\n            .firstName(\"example\")\n            .lastName(\"example\")\n            .username(\"example\")\n            .password(\"example\")\n            .roles(airflow_role.example().name())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:User\n    properties:\n      email: example\n      firstName: example\n      lastName: example\n      username: example\n      password: example\n      roles:\n        - ${airflow_role.example.name}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nUsers can be imported using the user key. terraform\n\n```sh\n $ pulumi import airflow:index/user:User example example\n```\n\n ",
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "description": "Whether the user is active.\n"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The user's email\n"
+                },
+                "failedLoginCount": {
+                    "type": "integer",
+                    "description": "The number of times the login failed.\n"
+                },
+                "firstName": {
+                    "type": "string",
+                    "description": "The user firstname\n"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "The user lastname\n"
+                },
+                "loginCount": {
+                    "type": "string",
+                    "description": "The login count.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The user password.\n"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A set of User roles to attach to the User.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The username\n"
+                }
+            },
+            "required": [
+                "active",
+                "email",
+                "failedLoginCount",
+                "firstName",
+                "lastName",
+                "loginCount",
+                "password",
+                "roles",
+                "username"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "The user's email\n",
+                    "willReplaceOnChanges": true
+                },
+                "firstName": {
+                    "type": "string",
+                    "description": "The user firstname\n"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "The user lastname\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The user password.\n"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A set of User roles to attach to the User.\n"
+                },
+                "username": {
+                    "type": "string",
+                    "description": "The username\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "email",
+                "firstName",
+                "lastName",
+                "password",
+                "roles",
+                "username"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering User resources.\n",
+                "properties": {
+                    "active": {
+                        "type": "boolean",
+                        "description": "Whether the user is active.\n"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "The user's email\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "failedLoginCount": {
+                        "type": "integer",
+                        "description": "The number of times the login failed.\n"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "description": "The user firstname\n"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "description": "The user lastname\n"
+                    },
+                    "loginCount": {
+                        "type": "string",
+                        "description": "The login count.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The user password.\n"
+                    },
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A set of User roles to attach to the User.\n"
+                    },
+                    "username": {
+                        "type": "string",
+                        "description": "The username\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "airflow:index/variable:Variable": {
+            "description": "Provides an Airflow variable.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Variable(\"example\", {\n    key: \"example\",\n    value: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Variable(\"example\",\n    key=\"example\",\n    value=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Variable(\"example\", new()\n    {\n        Key = \"example\",\n        Value = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewVariable(ctx, \"example\", \u0026airflow.VariableArgs{\n\t\t\tKey:   pulumi.String(\"example\"),\n\t\t\tValue: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Variable;\nimport com.pulumi.airflow.VariableArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Variable(\"example\", VariableArgs.builder()        \n            .key(\"example\")\n            .value(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Variable\n    properties:\n      key: example\n      value: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nVariables can be imported using the variable key. terraform\n\n```sh\n $ pulumi import airflow:index/variable:Variable default example\n```\n\n ",
+            "properties": {
+                "key": {
+                    "type": "string",
+                    "description": "The variable key.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The variable value.\n"
+                }
+            },
+            "required": [
+                "key",
+                "value"
+            ],
+            "inputProperties": {
+                "key": {
+                    "type": "string",
+                    "description": "The variable key.\n",
+                    "willReplaceOnChanges": true
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The variable value.\n"
+                }
+            },
+            "requiredInputs": [
+                "key",
+                "value"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Variable resources.\n",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "The variable key.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "The variable value.\n"
                     }
                 },
                 "type": "object"

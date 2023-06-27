@@ -20,6 +20,13 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get('baseEndpoint')
 
     @property
+    def disable_ssl_verification(self) -> Optional[bool]:
+        """
+        Disable SSL verification
+        """
+        return __config__.get_bool('disableSslVerification')
+
+    @property
     def oauth2_token(self) -> Optional[str]:
         """
         The oauth to use for API authentication

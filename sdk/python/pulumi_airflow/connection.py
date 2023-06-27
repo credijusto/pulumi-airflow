@@ -16,6 +16,7 @@ class ConnectionArgs:
     def __init__(__self__, *,
                  conn_type: pulumi.Input[str],
                  connection_id: pulumi.Input[str],
+                 description: Optional[pulumi.Input[str]] = None,
                  extra: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  login: Optional[pulumi.Input[str]] = None,
@@ -26,6 +27,7 @@ class ConnectionArgs:
         The set of arguments for constructing a Connection resource.
         :param pulumi.Input[str] conn_type: The connection type.
         :param pulumi.Input[str] connection_id: The connection ID.
+        :param pulumi.Input[str] description: The description of the connection.
         :param pulumi.Input[str] extra: Other values that cannot be put into another field, e.g. RSA keys.
         :param pulumi.Input[str] host: The host of the connection.
         :param pulumi.Input[str] login: The login of the connection.
@@ -35,6 +37,8 @@ class ConnectionArgs:
         """
         pulumi.set(__self__, "conn_type", conn_type)
         pulumi.set(__self__, "connection_id", connection_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if extra is not None:
             pulumi.set(__self__, "extra", extra)
         if host is not None:
@@ -71,6 +75,18 @@ class ConnectionArgs:
     @connection_id.setter
     def connection_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "connection_id", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the connection.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -150,6 +166,7 @@ class _ConnectionState:
     def __init__(__self__, *,
                  conn_type: Optional[pulumi.Input[str]] = None,
                  connection_id: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  extra: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  login: Optional[pulumi.Input[str]] = None,
@@ -160,6 +177,7 @@ class _ConnectionState:
         Input properties used for looking up and filtering Connection resources.
         :param pulumi.Input[str] conn_type: The connection type.
         :param pulumi.Input[str] connection_id: The connection ID.
+        :param pulumi.Input[str] description: The description of the connection.
         :param pulumi.Input[str] extra: Other values that cannot be put into another field, e.g. RSA keys.
         :param pulumi.Input[str] host: The host of the connection.
         :param pulumi.Input[str] login: The login of the connection.
@@ -171,6 +189,8 @@ class _ConnectionState:
             pulumi.set(__self__, "conn_type", conn_type)
         if connection_id is not None:
             pulumi.set(__self__, "connection_id", connection_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
         if extra is not None:
             pulumi.set(__self__, "extra", extra)
         if host is not None:
@@ -207,6 +227,18 @@ class _ConnectionState:
     @connection_id.setter
     def connection_id(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "connection_id", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> Optional[pulumi.Input[str]]:
+        """
+        The description of the connection.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "description", value)
 
     @property
     @pulumi.getter
@@ -288,6 +320,7 @@ class Connection(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  conn_type: Optional[pulumi.Input[str]] = None,
                  connection_id: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  extra: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  login: Optional[pulumi.Input[str]] = None,
@@ -321,6 +354,7 @@ class Connection(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] conn_type: The connection type.
         :param pulumi.Input[str] connection_id: The connection ID.
+        :param pulumi.Input[str] description: The description of the connection.
         :param pulumi.Input[str] extra: Other values that cannot be put into another field, e.g. RSA keys.
         :param pulumi.Input[str] host: The host of the connection.
         :param pulumi.Input[str] login: The login of the connection.
@@ -373,6 +407,7 @@ class Connection(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  conn_type: Optional[pulumi.Input[str]] = None,
                  connection_id: Optional[pulumi.Input[str]] = None,
+                 description: Optional[pulumi.Input[str]] = None,
                  extra: Optional[pulumi.Input[str]] = None,
                  host: Optional[pulumi.Input[str]] = None,
                  login: Optional[pulumi.Input[str]] = None,
@@ -394,6 +429,7 @@ class Connection(pulumi.CustomResource):
             if connection_id is None and not opts.urn:
                 raise TypeError("Missing required property 'connection_id'")
             __props__.__dict__["connection_id"] = connection_id
+            __props__.__dict__["description"] = description
             __props__.__dict__["extra"] = extra
             __props__.__dict__["host"] = host
             __props__.__dict__["login"] = login
@@ -412,6 +448,7 @@ class Connection(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             conn_type: Optional[pulumi.Input[str]] = None,
             connection_id: Optional[pulumi.Input[str]] = None,
+            description: Optional[pulumi.Input[str]] = None,
             extra: Optional[pulumi.Input[str]] = None,
             host: Optional[pulumi.Input[str]] = None,
             login: Optional[pulumi.Input[str]] = None,
@@ -427,6 +464,7 @@ class Connection(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] conn_type: The connection type.
         :param pulumi.Input[str] connection_id: The connection ID.
+        :param pulumi.Input[str] description: The description of the connection.
         :param pulumi.Input[str] extra: Other values that cannot be put into another field, e.g. RSA keys.
         :param pulumi.Input[str] host: The host of the connection.
         :param pulumi.Input[str] login: The login of the connection.
@@ -440,6 +478,7 @@ class Connection(pulumi.CustomResource):
 
         __props__.__dict__["conn_type"] = conn_type
         __props__.__dict__["connection_id"] = connection_id
+        __props__.__dict__["description"] = description
         __props__.__dict__["extra"] = extra
         __props__.__dict__["host"] = host
         __props__.__dict__["login"] = login
@@ -463,6 +502,14 @@ class Connection(pulumi.CustomResource):
         The connection ID.
         """
         return pulumi.get(self, "connection_id")
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Output[Optional[str]]:
+        """
+        The description of the connection.
+        """
+        return pulumi.get(self, "description")
 
     @property
     @pulumi.getter
