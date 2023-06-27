@@ -65,6 +65,9 @@ func Provider() tfbridge.ProviderInfo {
 			"airflow_connection": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Connection")},
 			"airflow_dag":        {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Dag")},
 			"airflow_pool":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Pool")},
+			"airflow_variable":   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Variable")},
+			"airflow_role":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Role")},
+			"airflow_user":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "User")},
 		},
 
 		JavaScript: &tfbridge.JavaScriptInfo{

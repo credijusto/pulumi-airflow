@@ -11,6 +11,11 @@ from .. import _utilities
 
 baseEndpoint: Optional[str]
 
+disableSslVerification: Optional[bool]
+"""
+Disable SSL verification
+"""
+
 oauth2Token: Optional[str]
 """
 The oauth to use for API authentication

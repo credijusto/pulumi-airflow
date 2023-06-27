@@ -47,6 +47,8 @@ func NewProvider(ctx *pulumi.Context,
 
 type providerArgs struct {
 	BaseEndpoint string `pulumi:"baseEndpoint"`
+	// Disable SSL verification
+	DisableSslVerification *bool `pulumi:"disableSslVerification"`
 	// The oauth to use for API authentication
 	Oauth2Token *string `pulumi:"oauth2Token"`
 	// The password to use for API basic authentication
@@ -58,6 +60,8 @@ type providerArgs struct {
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
 	BaseEndpoint pulumi.StringInput
+	// Disable SSL verification
+	DisableSslVerification pulumi.BoolPtrInput
 	// The oauth to use for API authentication
 	Oauth2Token pulumi.StringPtrInput
 	// The password to use for API basic authentication

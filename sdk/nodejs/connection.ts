@@ -64,6 +64,10 @@ export class Connection extends pulumi.CustomResource {
      */
     public readonly connectionId!: pulumi.Output<string>;
     /**
+     * The description of the connection.
+     */
+    public readonly description!: pulumi.Output<string | undefined>;
+    /**
      * Other values that cannot be put into another field, e.g. RSA keys.
      */
     public readonly extra!: pulumi.Output<string | undefined>;
@@ -103,6 +107,7 @@ export class Connection extends pulumi.CustomResource {
             const state = argsOrState as ConnectionState | undefined;
             resourceInputs["connType"] = state ? state.connType : undefined;
             resourceInputs["connectionId"] = state ? state.connectionId : undefined;
+            resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["extra"] = state ? state.extra : undefined;
             resourceInputs["host"] = state ? state.host : undefined;
             resourceInputs["login"] = state ? state.login : undefined;
@@ -119,6 +124,7 @@ export class Connection extends pulumi.CustomResource {
             }
             resourceInputs["connType"] = args ? args.connType : undefined;
             resourceInputs["connectionId"] = args ? args.connectionId : undefined;
+            resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["extra"] = args ? args.extra : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["login"] = args ? args.login : undefined;
@@ -143,6 +149,10 @@ export interface ConnectionState {
      * The connection ID.
      */
     connectionId?: pulumi.Input<string>;
+    /**
+     * The description of the connection.
+     */
+    description?: pulumi.Input<string>;
     /**
      * Other values that cannot be put into another field, e.g. RSA keys.
      */
@@ -181,6 +191,10 @@ export interface ConnectionArgs {
      * The connection ID.
      */
     connectionId: pulumi.Input<string>;
+    /**
+     * The description of the connection.
+     */
+    description?: pulumi.Input<string>;
     /**
      * Other values that cannot be put into another field, e.g. RSA keys.
      */

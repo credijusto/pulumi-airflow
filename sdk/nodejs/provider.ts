@@ -54,6 +54,7 @@ export class Provider extends pulumi.ProviderResource {
                 throw new Error("Missing required property 'baseEndpoint'");
             }
             resourceInputs["baseEndpoint"] = args ? args.baseEndpoint : undefined;
+            resourceInputs["disableSslVerification"] = pulumi.output(args ? args.disableSslVerification : undefined).apply(JSON.stringify);
             resourceInputs["oauth2Token"] = args ? args.oauth2Token : undefined;
             resourceInputs["password"] = args ? args.password : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
@@ -68,6 +69,10 @@ export class Provider extends pulumi.ProviderResource {
  */
 export interface ProviderArgs {
     baseEndpoint: pulumi.Input<string>;
+    /**
+     * Disable SSL verification
+     */
+    disableSslVerification?: pulumi.Input<boolean>;
     /**
      * The oauth to use for API authentication
      */
