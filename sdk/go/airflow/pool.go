@@ -75,6 +75,7 @@ func NewPool(ctx *pulumi.Context,
 	if args.Slots == nil {
 		return nil, errors.New("invalid value for required argument 'Slots'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Pool
 	err := ctx.RegisterResource("airflow:index/pool:Pool", name, args, &resource, opts...)
 	if err != nil {

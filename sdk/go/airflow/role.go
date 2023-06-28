@@ -73,6 +73,7 @@ func NewRole(ctx *pulumi.Context,
 	if args.Actions == nil {
 		return nil, errors.New("invalid value for required argument 'Actions'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Role
 	err := ctx.RegisterResource("airflow:index/role:Role", name, args, &resource, opts...)
 	if err != nil {

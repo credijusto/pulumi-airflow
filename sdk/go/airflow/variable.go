@@ -71,6 +71,7 @@ func NewVariable(ctx *pulumi.Context,
 	if args.Value == nil {
 		return nil, errors.New("invalid value for required argument 'Value'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Variable
 	err := ctx.RegisterResource("airflow:index/variable:Variable", name, args, &resource, opts...)
 	if err != nil {

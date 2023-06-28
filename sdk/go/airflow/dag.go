@@ -86,6 +86,7 @@ func NewDag(ctx *pulumi.Context,
 	if args.IsPaused == nil {
 		return nil, errors.New("invalid value for required argument 'IsPaused'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource Dag
 	err := ctx.RegisterResource("airflow:index/dag:Dag", name, args, &resource, opts...)
 	if err != nil {

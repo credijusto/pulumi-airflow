@@ -25,6 +25,7 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "airflow"
+        "name": "airflow",
+        "server": "github://api.github.com/Hellthrashers/pulumi-airflow"
     }
 }

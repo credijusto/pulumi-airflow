@@ -53,6 +53,7 @@ func Provider() tfbridge.ProviderInfo {
 		P:                    p,
 		Name:                 "airflow",
 		Publisher:            "Marco Antonio Ojeda De Pablo",
+		PluginDownloadURL:    "github://api.github.com/Hellthrashers/pulumi-airflow",
 		Description:          "A Pulumi package for creating and managing airflow cloud resources.",
 		Keywords:             []string{"pulumi", "airflow", "apache/airflow", "dags"},
 		License:              "Apache-2.0",

@@ -103,6 +103,7 @@ func NewUser(ctx *pulumi.Context,
 	if args.Username == nil {
 		return nil, errors.New("invalid value for required argument 'Username'")
 	}
+	opts = pkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("airflow:index/user:User", name, args, &resource, opts...)
 	if err != nil {
