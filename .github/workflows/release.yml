@@ -10,7 +10,7 @@ env:
   NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   PUBLISH_NPM: true
-  NPM_REGISTRY_URL: https://registry.npmjs.org/:_authToken=${NPM_TOKEN}
+  NPM_REGISTRY_URL: https://registry.npmjs.org/
 
 jobs:
   publish_binary:
