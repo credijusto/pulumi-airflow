@@ -10,7 +10,7 @@ env:
   NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
   PUBLISH_NPM: true
-  NPM_REGISTRY_URL: https://registry.npmjs.org/
+  NPM_REGISTRY_URL: https://registry.npmjs.org/:_authToken=${NPM_TOKEN}
 
 jobs:
   publish_binary:
@@ -37,7 +37,7 @@ jobs:
           args: -p 3 release --rm-dist
           version: latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         goversion:
           - 1.19.x
@@ -74,7 +74,7 @@ jobs:
           token: ${{ env.NPM_TOKEN }}
           package: ${{github.workspace}}/sdk/nodejs/bin/package.json
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         goversion:
           - 1.19.x
