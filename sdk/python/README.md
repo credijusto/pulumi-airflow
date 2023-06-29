@@ -327,7 +327,7 @@ In this section, we'll add the necessary configuration to work with GitHub Actio
 1. Replace this file with the README for the provider and push your changes:
 
     ```bash
-    mv README-PROVIDER.md README.md
+    mv README.md README.md
     ```
 
 1. If publishing the npm package fails during the "Publish SDKs" Action, perform the following steps:

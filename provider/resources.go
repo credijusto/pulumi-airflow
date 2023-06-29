@@ -72,7 +72,6 @@ func Provider() tfbridge.ProviderInfo {
 		},
 
 		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "pulumi-airflow",
 			// List any npm dependencies and their versions
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",

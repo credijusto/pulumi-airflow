@@ -1,5 +1,5 @@
 {
-    "name": "pulumi-airflow",
+    "name": "@pulumi/airflow",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing airflow cloud resources.",
     "keywords": [
