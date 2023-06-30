@@ -17,6 +17,7 @@
         "config/vars.ts",
         "connection.ts",
         "dag.ts",
+        "dagRun.ts",
         "index.ts",
         "pool.ts",
         "provider.ts",

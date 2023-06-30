@@ -381,7 +381,7 @@ class User(pulumi.CustomResource):
             __props__.__dict__["last_name"] = last_name
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
-            __props__.__dict__["password"] = password
+            __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
             if roles is None and not opts.urn:
                 raise TypeError("Missing required property 'roles'")
             __props__.__dict__["roles"] = roles
@@ -391,6 +391,8 @@ class User(pulumi.CustomResource):
             __props__.__dict__["active"] = None
             __props__.__dict__["failed_login_count"] = None
             __props__.__dict__["login_count"] = None
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["password"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(User, __self__).__init__(
             'airflow:index/user:User',
             resource_name,

@@ -24,6 +24,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Connection{}
 	case "airflow:index/dag:Dag":
 		r = &Dag{}
+	case "airflow:index/dagRun:DagRun":
+		r = &DagRun{}
 	case "airflow:index/pool:Pool":
 		r = &Pool{}
 	case "airflow:index/role:Role":
@@ -68,6 +70,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"airflow",
 		"index/dag",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"airflow",
+		"index/dagRun",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

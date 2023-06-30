@@ -5,13 +5,46 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./connection";
-export * from "./dag";
-export * from "./pool";
-export * from "./provider";
-export * from "./role";
-export * from "./user";
-export * from "./variable";
+export { ConnectionArgs, ConnectionState } from "./connection";
+export type Connection = import("./connection").Connection;
+export const Connection: typeof import("./connection").Connection = null as any;
+utilities.lazyLoad(exports, ["Connection"], () => require("./connection"));
+
+export { DagArgs, DagState } from "./dag";
+export type Dag = import("./dag").Dag;
+export const Dag: typeof import("./dag").Dag = null as any;
+utilities.lazyLoad(exports, ["Dag"], () => require("./dag"));
+
+export { DagRunArgs, DagRunState } from "./dagRun";
+export type DagRun = import("./dagRun").DagRun;
+export const DagRun: typeof import("./dagRun").DagRun = null as any;
+utilities.lazyLoad(exports, ["DagRun"], () => require("./dagRun"));
+
+export { PoolArgs, PoolState } from "./pool";
+export type Pool = import("./pool").Pool;
+export const Pool: typeof import("./pool").Pool = null as any;
+utilities.lazyLoad(exports, ["Pool"], () => require("./pool"));
+
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
+export { RoleArgs, RoleState } from "./role";
+export type Role = import("./role").Role;
+export const Role: typeof import("./role").Role = null as any;
+utilities.lazyLoad(exports, ["Role"], () => require("./role"));
+
+export { UserArgs, UserState } from "./user";
+export type User = import("./user").User;
+export const User: typeof import("./user").User = null as any;
+utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
+export { VariableArgs, VariableState } from "./variable";
+export type Variable = import("./variable").Variable;
+export const Variable: typeof import("./variable").Variable = null as any;
+utilities.lazyLoad(exports, ["Variable"], () => require("./variable"));
+
 
 // Export sub-modules:
 import * as config from "./config";
@@ -22,14 +55,6 @@ export {
     types,
 };
 
-// Import resources to register:
-import { Connection } from "./connection";
-import { Dag } from "./dag";
-import { Pool } from "./pool";
-import { Role } from "./role";
-import { User } from "./user";
-import { Variable } from "./variable";
-
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
@@ -38,6 +63,8 @@ const _module = {
                 return new Connection(name, <any>undefined, { urn })
             case "airflow:index/dag:Dag":
                 return new Dag(name, <any>undefined, { urn })
+            case "airflow:index/dagRun:DagRun":
+                return new DagRun(name, <any>undefined, { urn })
             case "airflow:index/pool:Pool":
                 return new Pool(name, <any>undefined, { urn })
             case "airflow:index/role:Role":
@@ -53,13 +80,11 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("airflow", "index/connection", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/dag", _module)
+pulumi.runtime.registerResourceModule("airflow", "index/dagRun", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/pool", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/role", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/user", _module)
 pulumi.runtime.registerResourceModule("airflow", "index/variable", _module)
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("airflow", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

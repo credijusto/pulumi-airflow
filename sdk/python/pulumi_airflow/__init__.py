@@ -7,6 +7,7 @@ import typing
 # Export this package's modules as members:
 from .connection import *
 from .dag import *
+from .dag_run import *
 from .pool import *
 from .provider import *
 from .role import *
@@ -39,6 +40,14 @@ _utilities.register(
   "fqn": "pulumi_airflow",
   "classes": {
    "airflow:index/dag:Dag": "Dag"
+  }
+ },
+ {
+  "pkg": "airflow",
+  "mod": "index/dagRun",
+  "fqn": "pulumi_airflow",
+  "classes": {
+   "airflow:index/dagRun:DagRun": "DagRun"
   }
  },
  {

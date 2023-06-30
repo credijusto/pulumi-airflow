@@ -11,7 +11,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as airflow from "@pulumi/airflow";
+ * import * as airflow from "pulumi-airflow";
  *
  * const example = new airflow.User("example", {
  *     email: "example",
@@ -141,7 +141,7 @@ export class User extends pulumi.CustomResource {
             resourceInputs["email"] = args ? args.email : undefined;
             resourceInputs["firstName"] = args ? args.firstName : undefined;
             resourceInputs["lastName"] = args ? args.lastName : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["roles"] = args ? args.roles : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
             resourceInputs["active"] = undefined /*out*/;
@@ -149,6 +149,8 @@ export class User extends pulumi.CustomResource {
             resourceInputs["loginCount"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(User.__pulumiType, name, resourceInputs, opts);
     }
 }

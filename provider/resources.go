@@ -50,17 +50,25 @@ func Provider() tfbridge.ProviderInfo {
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
-		P:                    p,
-		Name:                 "airflow",
-		Publisher:            "Marco Antonio Ojeda De Pablo",
-		PluginDownloadURL:    "github://api.github.com/Hellthrashers/pulumi-airflow",
-		Description:          "A Pulumi package for creating and managing airflow cloud resources.",
-		Keywords:             []string{"pulumi", "airflow", "apache/airflow", "dags"},
-		License:              "Apache-2.0",
-		Homepage:             "https://github.com/Hellthrashers/pulumi-airflow",
-		Repository:           "https://github.com/Hellthrashers/pulumi-airflow",
-		GitHubOrg:            "drfaust92",
-		Config:               map[string]*tfbridge.SchemaInfo{},
+		P:                 p,
+		Name:              "airflow",
+		Publisher:         "Marco Antonio Ojeda De Pablo",
+		PluginDownloadURL: "github://api.github.com/Hellthrashers/pulumi-airflow",
+		Description:       "A Pulumi package for creating and managing airflow cloud resources.",
+		Keywords:          []string{"pulumi", "airflow", "apache/airflow", "dags"},
+		License:           "Apache-2.0",
+		Homepage:          "https://github.com/Hellthrashers/pulumi-airflow",
+		Repository:        "https://github.com/Hellthrashers/pulumi-airflow",
+		GitHubOrg:         "drfaust92",
+		Config: map[string]*tfbridge.SchemaInfo{
+			"baseEndpoint": {
+				Default: &tfbridge.DefaultInfo{
+					EnvVars: []string{
+						"AIRFLOW_BASE_ENDPOINT",
+					},
+				},
+			},
+		},
 		PreConfigureCallback: preConfigureCallback,
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"airflow_connection": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Connection")},
@@ -69,6 +77,7 @@ func Provider() tfbridge.ProviderInfo {
 			"airflow_variable":   {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Variable")},
 			"airflow_role":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Role")},
 			"airflow_user":       {Tok: tfbridge.MakeResource(mainPkg, mainMod, "User")},
+			"airflow_dag_run":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "DagRun")},
 		},
 
 		JavaScript: &tfbridge.JavaScriptInfo{

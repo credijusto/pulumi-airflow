@@ -7,7 +7,6 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -18,7 +17,7 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
-	BaseEndpoint pulumi.StringOutput `pulumi:"baseEndpoint"`
+	BaseEndpoint pulumi.StringPtrOutput `pulumi:"baseEndpoint"`
 	// The oauth to use for API authentication
 	Oauth2Token pulumi.StringPtrOutput `pulumi:"oauth2Token"`
 	// The password to use for API basic authentication
@@ -31,12 +30,20 @@ type Provider struct {
 func NewProvider(ctx *pulumi.Context,
 	name string, args *ProviderArgs, opts ...pulumi.ResourceOption) (*Provider, error) {
 	if args == nil {
-		return nil, errors.New("missing one or more required arguments")
+		args = &ProviderArgs{}
 	}
 
-	if args.BaseEndpoint == nil {
-		return nil, errors.New("invalid value for required argument 'BaseEndpoint'")
+	if args.Oauth2Token != nil {
+		args.Oauth2Token = pulumi.ToSecret(args.Oauth2Token).(pulumi.StringPtrInput)
 	}
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"oauth2Token",
+		"password",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:airflow", name, args, &resource, opts...)
@@ -47,7 +54,7 @@ func NewProvider(ctx *pulumi.Context,
 }
 
 type providerArgs struct {
-	BaseEndpoint string `pulumi:"baseEndpoint"`
+	BaseEndpoint *string `pulumi:"baseEndpoint"`
 	// Disable SSL verification
 	DisableSslVerification *bool `pulumi:"disableSslVerification"`
 	// The oauth to use for API authentication
@@ -60,7 +67,7 @@ type providerArgs struct {
 
 // The set of arguments for constructing a Provider resource.
 type ProviderArgs struct {
-	BaseEndpoint pulumi.StringInput
+	BaseEndpoint pulumi.StringPtrInput
 	// Disable SSL verification
 	DisableSslVerification pulumi.BoolPtrInput
 	// The oauth to use for API authentication
@@ -108,8 +115,8 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
-func (o ProviderOutput) BaseEndpoint() pulumi.StringOutput {
-	return o.ApplyT(func(v *Provider) pulumi.StringOutput { return v.BaseEndpoint }).(pulumi.StringOutput)
+func (o ProviderOutput) BaseEndpoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.BaseEndpoint }).(pulumi.StringPtrOutput)
 }
 
 // The oauth to use for API authentication
