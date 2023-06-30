@@ -32,7 +32,6 @@ const (
 	mainPkg = "airflow"
 	// modules:
 	mainMod = "index" // the airflow module
-
 )
 
 // preConfigureCallback is called before the providerConfigure function of the underlying provider.
@@ -61,7 +60,7 @@ func Provider() tfbridge.ProviderInfo {
 		Repository:        "https://github.com/Hellthrashers/pulumi-airflow",
 		GitHubOrg:         "drfaust92",
 		Config: map[string]*tfbridge.SchemaInfo{
-			"baseEndpoint": {
+			"base_endpoint": {
 				Default: &tfbridge.DefaultInfo{
 					EnvVars: []string{
 						"AIRFLOW_BASE_ENDPOINT",

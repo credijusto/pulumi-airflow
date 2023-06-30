@@ -17,7 +17,7 @@ __config__ = pulumi.Config('airflow')
 class _ExportableConfig(types.ModuleType):
     @property
     def base_endpoint(self) -> Optional[str]:
-        return __config__.get('baseEndpoint')
+        return __config__.get('baseEndpoint') or _utilities.get_env('AIRFLOW_BASE_ENDPOINT')
 
     @property
     def disable_ssl_verification(self) -> Optional[bool]:

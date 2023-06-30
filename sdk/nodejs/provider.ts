@@ -50,7 +50,7 @@ export class Provider extends pulumi.ProviderResource {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            resourceInputs["baseEndpoint"] = args ? args.baseEndpoint : undefined;
+            resourceInputs["baseEndpoint"] = (args ? args.baseEndpoint : undefined) ?? utilities.getEnv("AIRFLOW_BASE_ENDPOINT");
             resourceInputs["disableSslVerification"] = pulumi.output(args ? args.disableSslVerification : undefined).apply(JSON.stringify);
             resourceInputs["oauth2Token"] = args?.oauth2Token ? pulumi.secret(args.oauth2Token) : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;

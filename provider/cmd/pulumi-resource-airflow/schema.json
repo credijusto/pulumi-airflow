@@ -55,7 +55,12 @@
     "config": {
         "variables": {
             "baseEndpoint": {
-                "type": "string"
+                "type": "string",
+                "defaultInfo": {
+                    "environment": [
+                        "AIRFLOW_BASE_ENDPOINT"
+                    ]
+                }
             },
             "disableSslVerification": {
                 "type": "boolean",
@@ -123,7 +128,12 @@
         },
         "inputProperties": {
             "baseEndpoint": {
-                "type": "string"
+                "type": "string",
+                "defaultInfo": {
+                    "environment": [
+                        "AIRFLOW_BASE_ENDPOINT"
+                    ]
+                }
             },
             "disableSslVerification": {
                 "type": "boolean",

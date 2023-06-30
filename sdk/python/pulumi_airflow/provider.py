@@ -26,6 +26,8 @@ class ProviderArgs:
         :param pulumi.Input[str] password: The password to use for API basic authentication
         :param pulumi.Input[str] username: The username to use for API basic authentication
         """
+        if base_endpoint is None:
+            base_endpoint = _utilities.get_env('AIRFLOW_BASE_ENDPOINT')
         if base_endpoint is not None:
             pulumi.set(__self__, "base_endpoint", base_endpoint)
         if disable_ssl_verification is not None:
@@ -160,6 +162,8 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
+            if base_endpoint is None:
+                base_endpoint = _utilities.get_env('AIRFLOW_BASE_ENDPOINT')
             __props__.__dict__["base_endpoint"] = base_endpoint
             __props__.__dict__["disable_ssl_verification"] = pulumi.Output.from_input(disable_ssl_verification).apply(pulumi.runtime.to_json) if disable_ssl_verification is not None else None
             __props__.__dict__["oauth2_token"] = None if oauth2_token is None else pulumi.Output.secret(oauth2_token)

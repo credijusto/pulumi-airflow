@@ -9,7 +9,15 @@ import (
 )
 
 func GetBaseEndpoint(ctx *pulumi.Context) string {
-	return config.Get(ctx, "airflow:baseEndpoint")
+	v, err := config.Try(ctx, "airflow:baseEndpoint")
+	if err == nil {
+		return v
+	}
+	var value string
+	if d := getEnvOrDefault(nil, nil, "AIRFLOW_BASE_ENDPOINT"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // Disable SSL verification
