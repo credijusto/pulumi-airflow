@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -21,7 +21,6 @@ import (
 // import (
 //
 //	"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow"
-//	"github.com/pulumi/pulumi-airflow/sdk/go/airflow"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //
 // )
@@ -29,8 +28,8 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := airflow.NewRole(ctx, "example", &airflow.RoleArgs{
-//				Actions: RoleActionArray{
-//					&RoleActionArgs{
+//				Actions: airflow.RoleActionArray{
+//					&airflow.RoleActionArgs{
 //						Action:   pulumi.String("can_read"),
 //						Resource: pulumi.String("Audit Logs"),
 //					},
@@ -57,7 +56,7 @@ import (
 type Role struct {
 	pulumi.CustomResourceState
 
-	// The name of the permission.
+	// The action struct that defines the role. See Action.
 	Actions RoleActionArrayOutput `pulumi:"actions"`
 	// The name of the role
 	Name pulumi.StringOutput `pulumi:"name"`
@@ -96,14 +95,14 @@ func GetRole(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Role resources.
 type roleState struct {
-	// The name of the permission.
+	// The action struct that defines the role. See Action.
 	Actions []RoleAction `pulumi:"actions"`
 	// The name of the role
 	Name *string `pulumi:"name"`
 }
 
 type RoleState struct {
-	// The name of the permission.
+	// The action struct that defines the role. See Action.
 	Actions RoleActionArrayInput
 	// The name of the role
 	Name pulumi.StringPtrInput
@@ -114,7 +113,7 @@ func (RoleState) ElementType() reflect.Type {
 }
 
 type roleArgs struct {
-	// The name of the permission.
+	// The action struct that defines the role. See Action.
 	Actions []RoleAction `pulumi:"actions"`
 	// The name of the role
 	Name *string `pulumi:"name"`
@@ -122,7 +121,7 @@ type roleArgs struct {
 
 // The set of arguments for constructing a Role resource.
 type RoleArgs struct {
-	// The name of the permission.
+	// The action struct that defines the role. See Action.
 	Actions RoleActionArrayInput
 	// The name of the role
 	Name pulumi.StringPtrInput
@@ -215,7 +214,7 @@ func (o RoleOutput) ToRoleOutputWithContext(ctx context.Context) RoleOutput {
 	return o
 }
 
-// The name of the permission.
+// The action struct that defines the role. See Action.
 func (o RoleOutput) Actions() RoleActionArrayOutput {
 	return o.ApplyT(func(v *Role) RoleActionArrayOutput { return v.Actions }).(RoleActionArrayOutput)
 }

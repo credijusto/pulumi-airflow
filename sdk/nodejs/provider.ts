@@ -25,7 +25,7 @@ export class Provider extends pulumi.ProviderResource {
         return obj['__pulumiType'] === Provider.__pulumiType;
     }
 
-    public readonly baseEndpoint!: pulumi.Output<string>;
+    public readonly baseEndpoint!: pulumi.Output<string | undefined>;
     /**
      * The oauth to use for API authentication
      */
@@ -46,20 +46,19 @@ export class Provider extends pulumi.ProviderResource {
      * @param args The arguments to use to populate this resource's properties.
      * @param opts A bag of options that control this resource's behavior.
      */
-    constructor(name: string, args: ProviderArgs, opts?: pulumi.ResourceOptions) {
+    constructor(name: string, args?: ProviderArgs, opts?: pulumi.ResourceOptions) {
         let resourceInputs: pulumi.Inputs = {};
         opts = opts || {};
         {
-            if ((!args || args.baseEndpoint === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'baseEndpoint'");
-            }
             resourceInputs["baseEndpoint"] = args ? args.baseEndpoint : undefined;
             resourceInputs["disableSslVerification"] = pulumi.output(args ? args.disableSslVerification : undefined).apply(JSON.stringify);
-            resourceInputs["oauth2Token"] = args ? args.oauth2Token : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["oauth2Token"] = args?.oauth2Token ? pulumi.secret(args.oauth2Token) : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["oauth2Token", "password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Provider.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -68,7 +67,7 @@ export class Provider extends pulumi.ProviderResource {
  * The set of arguments for constructing a Provider resource.
  */
 export interface ProviderArgs {
-    baseEndpoint: pulumi.Input<string>;
+    baseEndpoint?: pulumi.Input<string>;
     /**
      * Disable SSL verification
      */

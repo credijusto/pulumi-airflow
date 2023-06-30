@@ -7,7 +7,7 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
@@ -34,7 +34,7 @@ import (
 //				Username:  pulumi.String("example"),
 //				Password:  pulumi.String("example"),
 //				Roles: pulumi.StringArray{
-//					pulumi.Any(airflow_role.Example.Name),
+//					airflow_role.Example.Name,
 //				},
 //			})
 //			if err != nil {
@@ -103,6 +103,13 @@ func NewUser(ctx *pulumi.Context,
 	if args.Username == nil {
 		return nil, errors.New("invalid value for required argument 'Username'")
 	}
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
 	opts = pkgResourceDefaultOpts(opts)
 	var resource User
 	err := ctx.RegisterResource("airflow:index/user:User", name, args, &resource, opts...)

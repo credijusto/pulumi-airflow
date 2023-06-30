@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "./types";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -12,14 +13,12 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as airflow from "@pulumi/airflow";
+ * import * as airflow from "pulumi-airflow";
  *
- * const example = new airflow.Role("example", {
- *     actions: [{
- *         action: "can_read",
- *         resource: "Audit Logs",
- *     }],
- * });
+ * const example = new airflow.Role("example", {actions: [{
+ *     action: "can_read",
+ *     resource: "Audit Logs",
+ * }]});
  * ```
  *
  * ## Import
@@ -59,7 +58,7 @@ export class Role extends pulumi.CustomResource {
     }
 
     /**
-     * The name of the permission.
+     * The action struct that defines the role. See Action.
      */
     public readonly actions!: pulumi.Output<outputs.RoleAction[]>;
     /**
@@ -100,7 +99,7 @@ export class Role extends pulumi.CustomResource {
  */
 export interface RoleState {
     /**
-     * The name of the permission.
+     * The action struct that defines the role. See Action.
      */
     actions?: pulumi.Input<pulumi.Input<inputs.RoleAction>[]>;
     /**
@@ -114,7 +113,7 @@ export interface RoleState {
  */
 export interface RoleArgs {
     /**
-     * The name of the permission.
+     * The action struct that defines the role. See Action.
      */
     actions: pulumi.Input<pulumi.Input<inputs.RoleAction>[]>;
     /**

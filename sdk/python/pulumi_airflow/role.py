@@ -20,7 +20,7 @@ class RoleArgs:
                  name: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Role resource.
-        :param pulumi.Input[Sequence[pulumi.Input['RoleActionArgs']]] actions: The name of the permission.
+        :param pulumi.Input[Sequence[pulumi.Input['RoleActionArgs']]] actions: The action struct that defines the role. See Action.
         :param pulumi.Input[str] name: The name of the role
         """
         pulumi.set(__self__, "actions", actions)
@@ -31,7 +31,7 @@ class RoleArgs:
     @pulumi.getter
     def actions(self) -> pulumi.Input[Sequence[pulumi.Input['RoleActionArgs']]]:
         """
-        The name of the permission.
+        The action struct that defines the role. See Action.
         """
         return pulumi.get(self, "actions")
 
@@ -59,7 +59,7 @@ class _RoleState:
                  name: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering Role resources.
-        :param pulumi.Input[Sequence[pulumi.Input['RoleActionArgs']]] actions: The name of the permission.
+        :param pulumi.Input[Sequence[pulumi.Input['RoleActionArgs']]] actions: The action struct that defines the role. See Action.
         :param pulumi.Input[str] name: The name of the role
         """
         if actions is not None:
@@ -71,7 +71,7 @@ class _RoleState:
     @pulumi.getter
     def actions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RoleActionArgs']]]]:
         """
-        The name of the permission.
+        The action struct that defines the role. See Action.
         """
         return pulumi.get(self, "actions")
 
@@ -125,7 +125,7 @@ class Role(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RoleActionArgs']]]] actions: The name of the permission.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RoleActionArgs']]]] actions: The action struct that defines the role. See Action.
         :param pulumi.Input[str] name: The name of the role
         """
         ...
@@ -206,7 +206,7 @@ class Role(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RoleActionArgs']]]] actions: The name of the permission.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['RoleActionArgs']]]] actions: The action struct that defines the role. See Action.
         :param pulumi.Input[str] name: The name of the role
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -221,7 +221,7 @@ class Role(pulumi.CustomResource):
     @pulumi.getter
     def actions(self) -> pulumi.Output[Sequence['outputs.RoleAction']]:
         """
-        The name of the permission.
+        The action struct that defines the role. See Action.
         """
         return pulumi.get(self, "actions")
 

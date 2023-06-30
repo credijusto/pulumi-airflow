@@ -63,11 +63,13 @@
             },
             "oauth2Token": {
                 "type": "string",
-                "description": "The oauth to use for API authentication\n"
+                "description": "The oauth to use for API authentication\n",
+                "secret": true
             },
             "password": {
                 "type": "string",
-                "description": "The password to use for API basic authentication\n"
+                "description": "The password to use for API basic authentication\n",
+                "secret": true
             },
             "username": {
                 "type": "string",
@@ -80,21 +82,11 @@
             "properties": {
                 "action": {
                     "type": "string",
-                    "description": "The name of the permission.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The name of the permission.\n"
                 },
                 "resource": {
                     "type": "string",
-                    "description": "The name of the resource.\n",
-                    "language": {
-                        "python": {
-                            "mapCase": false
-                        }
-                    }
+                    "description": "The name of the resource.\n"
                 }
             },
             "type": "object",
@@ -116,20 +108,19 @@
             },
             "oauth2Token": {
                 "type": "string",
-                "description": "The oauth to use for API authentication\n"
+                "description": "The oauth to use for API authentication\n",
+                "secret": true
             },
             "password": {
                 "type": "string",
-                "description": "The password to use for API basic authentication\n"
+                "description": "The password to use for API basic authentication\n",
+                "secret": true
             },
             "username": {
                 "type": "string",
                 "description": "The username to use for API basic authentication\n"
             }
         },
-        "required": [
-            "baseEndpoint"
-        ],
         "inputProperties": {
             "baseEndpoint": {
                 "type": "string"
@@ -140,24 +131,23 @@
             },
             "oauth2Token": {
                 "type": "string",
-                "description": "The oauth to use for API authentication\n"
+                "description": "The oauth to use for API authentication\n",
+                "secret": true
             },
             "password": {
                 "type": "string",
-                "description": "The password to use for API basic authentication\n"
+                "description": "The password to use for API basic authentication\n",
+                "secret": true
             },
             "username": {
                 "type": "string",
                 "description": "The username to use for API basic authentication\n"
             }
-        },
-        "requiredInputs": [
-            "baseEndpoint"
-        ]
+        }
     },
     "resources": {
         "airflow:index/connection:Connection": {
-            "description": "Provides an Airflow connection.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Connection(\"example\", {\n    connType: \"example\",\n    connectionId: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Connection(\"example\",\n    conn_type=\"example\",\n    connection_id=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Connection(\"example\", new()\n    {\n        ConnType = \"example\",\n        ConnectionId = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewConnection(ctx, \"example\", \u0026airflow.ConnectionArgs{\n\t\t\tConnType:     pulumi.String(\"example\"),\n\t\t\tConnectionId: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Connection;\nimport com.pulumi.airflow.ConnectionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Connection(\"example\", ConnectionArgs.builder()        \n            .connType(\"example\")\n            .connectionId(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Connection\n    properties:\n      connType: example\n      connectionId: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConnections can be imported using the connection key. terraform\n\n```sh\n $ pulumi import airflow:index/connection:Connection default example\n```\n\n ",
+            "description": "Provides an Airflow connection.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.Connection(\"example\", {\n    connType: \"example\",\n    connectionId: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Connection(\"example\",\n    conn_type=\"example\",\n    connection_id=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Connection(\"example\", new()\n    {\n        ConnType = \"example\",\n        ConnectionId = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewConnection(ctx, \"example\", \u0026airflow.ConnectionArgs{\n\t\t\tConnType:     pulumi.String(\"example\"),\n\t\t\tConnectionId: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Connection;\nimport com.pulumi.airflow.ConnectionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Connection(\"example\", ConnectionArgs.builder()        \n            .connType(\"example\")\n            .connectionId(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Connection\n    properties:\n      connType: example\n      connectionId: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nConnections can be imported using the connection key. terraform\n\n```sh\n $ pulumi import airflow:index/connection:Connection default example\n```\n\n ",
             "properties": {
                 "connType": {
                     "type": "string",
@@ -288,7 +278,7 @@
             }
         },
         "airflow:index/dag:Dag": {
-            "description": "Provides an Airflow DAG.\n\n\u003e Note this resource adpots an existing DAG and does not create a one, Also on delete the resource by default. A DAG is only deleted from state and not acutally deleted.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Dag(\"example\", {\n    dagId: \"example\",\n    isPaused: false,\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Dag(\"example\",\n    dag_id=\"example\",\n    is_paused=False)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Dag(\"example\", new()\n    {\n        DagId = \"example\",\n        IsPaused = false,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewDag(ctx, \"example\", \u0026airflow.DagArgs{\n\t\t\tDagId:    pulumi.String(\"example\"),\n\t\t\tIsPaused: pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Dag;\nimport com.pulumi.airflow.DagArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Dag(\"example\", DagArgs.builder()        \n            .dagId(\"example\")\n            .isPaused(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Dag\n    properties:\n      dagId: example\n      isPaused: false\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nDAGs can be imported using the DAG Id. terraform\n\n```sh\n $ pulumi import airflow:index/dag:Dag default example\n```\n\n ",
+            "description": "Provides an Airflow DAG.\n\n\u003e Note this resource adpots an existing DAG and does not create a one, Also on delete the resource by default. A DAG is only deleted from state and not acutally deleted.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.Dag(\"example\", {\n    dagId: \"example\",\n    isPaused: false,\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Dag(\"example\",\n    dag_id=\"example\",\n    is_paused=False)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Dag(\"example\", new()\n    {\n        DagId = \"example\",\n        IsPaused = false,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewDag(ctx, \"example\", \u0026airflow.DagArgs{\n\t\t\tDagId:    pulumi.String(\"example\"),\n\t\t\tIsPaused: pulumi.Bool(false),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Dag;\nimport com.pulumi.airflow.DagArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Dag(\"example\", DagArgs.builder()        \n            .dagId(\"example\")\n            .isPaused(false)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Dag\n    properties:\n      dagId: example\n      isPaused: false\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nDAGs can be imported using the DAG Id. terraform\n\n```sh\n $ pulumi import airflow:index/dag:Dag default example\n```\n\n ",
             "properties": {
                 "dagId": {
                     "type": "string",
@@ -397,8 +387,88 @@
                 "type": "object"
             }
         },
+        "airflow:index/dagRun:DagRun": {
+            "description": "Provides an Airflow dag run resource (triggers a DAG).\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.DagRun(\"example\", {\n    conf: {\n        example: \"example\",\n    },\n    dagId: \"example\",\n    dagRunId: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.DagRun(\"example\",\n    conf={\n        \"example\": \"example\",\n    },\n    dag_id=\"example\",\n    dag_run_id=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.DagRun(\"example\", new()\n    {\n        Conf = \n        {\n            { \"example\", \"example\" },\n        },\n        DagId = \"example\",\n        DagRunId = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewDagRun(ctx, \"example\", \u0026airflow.DagRunArgs{\n\t\t\tConf: pulumi.StringMap{\n\t\t\t\t\"example\": pulumi.String(\"example\"),\n\t\t\t},\n\t\t\tDagId:    pulumi.String(\"example\"),\n\t\t\tDagRunId: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.DagRun;\nimport com.pulumi.airflow.DagRunArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new DagRun(\"example\", DagRunArgs.builder()        \n            .conf(Map.of(\"example\", \"example\"))\n            .dagId(\"example\")\n            .dagRunId(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:DagRun\n    properties:\n      conf:\n        example: example\n      dagId: example\n      dagRunId: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nDAG Runs can be imported using the `dag_id:dag_run_id`. terraform\n\n```sh\n $ pulumi import airflow:index/dagRun:DagRun default example:example\n```\n\n ",
+            "properties": {
+                "conf": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "A map describing additional configuration parameters.\n"
+                },
+                "dagId": {
+                    "type": "string",
+                    "description": "The DAG ID to run.\n"
+                },
+                "dagRunId": {
+                    "type": "string",
+                    "description": "The DAG Run ID. If a value is not passed, a random one will be generated based on execution date.\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The DAG state.\n"
+                }
+            },
+            "required": [
+                "dagId",
+                "dagRunId",
+                "state"
+            ],
+            "inputProperties": {
+                "conf": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "A map describing additional configuration parameters.\n",
+                    "willReplaceOnChanges": true
+                },
+                "dagId": {
+                    "type": "string",
+                    "description": "The DAG ID to run.\n",
+                    "willReplaceOnChanges": true
+                },
+                "dagRunId": {
+                    "type": "string",
+                    "description": "The DAG Run ID. If a value is not passed, a random one will be generated based on execution date.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "dagId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DagRun resources.\n",
+                "properties": {
+                    "conf": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "A map describing additional configuration parameters.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "dagId": {
+                        "type": "string",
+                        "description": "The DAG ID to run.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "dagRunId": {
+                        "type": "string",
+                        "description": "The DAG Run ID. If a value is not passed, a random one will be generated based on execution date.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "The DAG state.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "airflow:index/pool:Pool": {
-            "description": "Provides an Airflow pool.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Pool(\"example\", {\n    slots: 2,\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Pool(\"example\", slots=2)\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Pool(\"example\", new()\n    {\n        Slots = 2,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewPool(ctx, \"example\", \u0026airflow.PoolArgs{\n\t\t\tSlots: pulumi.Int(2),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Pool;\nimport com.pulumi.airflow.PoolArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Pool(\"example\", PoolArgs.builder()        \n            .slots(2)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Pool\n    properties:\n      slots: 2\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nPools can be imported using the pool name. terraform\n\n```sh\n $ pulumi import airflow:index/pool:Pool default example\n```\n\n ",
+            "description": "Provides an Airflow pool.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.Pool(\"example\", {slots: 2});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Pool(\"example\", slots=2)\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Pool(\"example\", new()\n    {\n        Slots = 2,\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewPool(ctx, \"example\", \u0026airflow.PoolArgs{\n\t\t\tSlots: pulumi.Int(2),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Pool;\nimport com.pulumi.airflow.PoolArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Pool(\"example\", PoolArgs.builder()        \n            .slots(2)\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Pool\n    properties:\n      slots: 2\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nPools can be imported using the pool name. terraform\n\n```sh\n $ pulumi import airflow:index/pool:Pool default example\n```\n\n ",
             "properties": {
                 "name": {
                     "type": "string",
@@ -480,14 +550,14 @@
             }
         },
         "airflow:index/role:Role": {
-            "description": "Provides an Airflow role.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Role(\"example\", {\n    actions: [{\n        action: \"can_read\",\n        resource: \"Audit Logs\",\n    }],\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Role(\"example\", actions=[airflow.RoleActionArgs(\n    action=\"can_read\",\n    resource=\"Audit Logs\",\n)])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Role(\"example\", new()\n    {\n        Actions = new[]\n        {\n            new Airflow.Inputs.RoleActionArgs\n            {\n                Action = \"can_read\",\n                Resource = \"Audit Logs\",\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewRole(ctx, \"example\", \u0026airflow.RoleArgs{\n\t\t\tActions: RoleActionArray{\n\t\t\t\t\u0026RoleActionArgs{\n\t\t\t\t\tAction:   pulumi.String(\"can_read\"),\n\t\t\t\t\tResource: pulumi.String(\"Audit Logs\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Role;\nimport com.pulumi.airflow.RoleArgs;\nimport com.pulumi.airflow.inputs.RoleActionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Role(\"example\", RoleArgs.builder()        \n            .actions(RoleActionArgs.builder()\n                .action(\"can_read\")\n                .resource(\"Audit Logs\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Role\n    properties:\n      actions:\n        - action: can_read\n          resource: Audit Logs\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nRoles can be imported using the role key. terraform\n\n```sh\n $ pulumi import airflow:index/role:Role default example\n```\n\n ",
+            "description": "Provides an Airflow role.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.Role(\"example\", {actions: [{\n    action: \"can_read\",\n    resource: \"Audit Logs\",\n}]});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Role(\"example\", actions=[airflow.RoleActionArgs(\n    action=\"can_read\",\n    resource=\"Audit Logs\",\n)])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Role(\"example\", new()\n    {\n        Actions = new[]\n        {\n            new Airflow.Inputs.RoleActionArgs\n            {\n                Action = \"can_read\",\n                Resource = \"Audit Logs\",\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewRole(ctx, \"example\", \u0026airflow.RoleArgs{\n\t\t\tActions: airflow.RoleActionArray{\n\t\t\t\t\u0026airflow.RoleActionArgs{\n\t\t\t\t\tAction:   pulumi.String(\"can_read\"),\n\t\t\t\t\tResource: pulumi.String(\"Audit Logs\"),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Role;\nimport com.pulumi.airflow.RoleArgs;\nimport com.pulumi.airflow.inputs.RoleActionArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Role(\"example\", RoleArgs.builder()        \n            .actions(RoleActionArgs.builder()\n                .action(\"can_read\")\n                .resource(\"Audit Logs\")\n                .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Role\n    properties:\n      actions:\n        - action: can_read\n          resource: Audit Logs\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nRoles can be imported using the role key. terraform\n\n```sh\n $ pulumi import airflow:index/role:Role default example\n```\n\n ",
             "properties": {
                 "actions": {
                     "type": "array",
                     "items": {
                         "$ref": "#/types/airflow:index/RoleAction:RoleAction"
                     },
-                    "description": "The name of the permission.\n"
+                    "description": "The action struct that defines the role. See Action.\n"
                 },
                 "name": {
                     "type": "string",
@@ -504,7 +574,7 @@
                     "items": {
                         "$ref": "#/types/airflow:index/RoleAction:RoleAction"
                     },
-                    "description": "The name of the permission.\n"
+                    "description": "The action struct that defines the role. See Action.\n"
                 },
                 "name": {
                     "type": "string",
@@ -523,7 +593,7 @@
                         "items": {
                             "$ref": "#/types/airflow:index/RoleAction:RoleAction"
                         },
-                        "description": "The name of the permission.\n"
+                        "description": "The action struct that defines the role. See Action.\n"
                     },
                     "name": {
                         "type": "string",
@@ -535,7 +605,7 @@
             }
         },
         "airflow:index/user:User": {
-            "description": "Provides an Airflow user.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.User(\"example\", {\n    email: \"example\",\n    firstName: \"example\",\n    lastName: \"example\",\n    username: \"example\",\n    password: \"example\",\n    roles: [airflow_role.example.name],\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.User(\"example\",\n    email=\"example\",\n    first_name=\"example\",\n    last_name=\"example\",\n    username=\"example\",\n    password=\"example\",\n    roles=[airflow_role[\"example\"][\"name\"]])\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.User(\"example\", new()\n    {\n        Email = \"example\",\n        FirstName = \"example\",\n        LastName = \"example\",\n        Username = \"example\",\n        Password = \"example\",\n        Roles = new[]\n        {\n            airflow_role.Example.Name,\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewUser(ctx, \"example\", \u0026airflow.UserArgs{\n\t\t\tEmail:     pulumi.String(\"example\"),\n\t\t\tFirstName: pulumi.String(\"example\"),\n\t\t\tLastName:  pulumi.String(\"example\"),\n\t\t\tUsername:  pulumi.String(\"example\"),\n\t\t\tPassword:  pulumi.String(\"example\"),\n\t\t\tRoles: pulumi.StringArray{\n\t\t\t\tpulumi.Any(airflow_role.Example.Name),\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.User;\nimport com.pulumi.airflow.UserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new User(\"example\", UserArgs.builder()        \n            .email(\"example\")\n            .firstName(\"example\")\n            .lastName(\"example\")\n            .username(\"example\")\n            .password(\"example\")\n            .roles(airflow_role.example().name())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:User\n    properties:\n      email: example\n      firstName: example\n      lastName: example\n      username: example\n      password: example\n      roles:\n        - ${airflow_role.example.name}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nUsers can be imported using the user key. terraform\n\n```sh\n $ pulumi import airflow:index/user:User example example\n```\n\n ",
+            "description": "Provides an Airflow user.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.User(\"example\", {\n    email: \"example\",\n    firstName: \"example\",\n    lastName: \"example\",\n    username: \"example\",\n    password: \"example\",\n    roles: [airflow_role.example.name],\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.User(\"example\",\n    email=\"example\",\n    first_name=\"example\",\n    last_name=\"example\",\n    username=\"example\",\n    password=\"example\",\n    roles=[airflow_role[\"example\"][\"name\"]])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.User(\"example\", new()\n    {\n        Email = \"example\",\n        FirstName = \"example\",\n        LastName = \"example\",\n        Username = \"example\",\n        Password = \"example\",\n        Roles = new[]\n        {\n            airflow_role.Example.Name,\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewUser(ctx, \"example\", \u0026airflow.UserArgs{\n\t\t\tEmail:     pulumi.String(\"example\"),\n\t\t\tFirstName: pulumi.String(\"example\"),\n\t\t\tLastName:  pulumi.String(\"example\"),\n\t\t\tUsername:  pulumi.String(\"example\"),\n\t\t\tPassword:  pulumi.String(\"example\"),\n\t\t\tRoles: pulumi.StringArray{\n\t\t\t\tairflow_role.Example.Name,\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.User;\nimport com.pulumi.airflow.UserArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new User(\"example\", UserArgs.builder()        \n            .email(\"example\")\n            .firstName(\"example\")\n            .lastName(\"example\")\n            .username(\"example\")\n            .password(\"example\")\n            .roles(airflow_role.example().name())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:User\n    properties:\n      email: example\n      firstName: example\n      lastName: example\n      username: example\n      password: example\n      roles:\n        - ${airflow_role.example.name}\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nUsers can be imported using the user key. terraform\n\n```sh\n $ pulumi import airflow:index/user:User example example\n```\n\n ",
             "properties": {
                 "active": {
                     "type": "boolean",
@@ -563,7 +633,8 @@
                 },
                 "password": {
                     "type": "string",
-                    "description": "The user password.\n"
+                    "description": "The user password.\n",
+                    "secret": true
                 },
                 "roles": {
                     "type": "array",
@@ -604,7 +675,8 @@
                 },
                 "password": {
                     "type": "string",
-                    "description": "The user password.\n"
+                    "description": "The user password.\n",
+                    "secret": true
                 },
                 "roles": {
                     "type": "array",
@@ -657,7 +729,8 @@
                     },
                     "password": {
                         "type": "string",
-                        "description": "The user password.\n"
+                        "description": "The user password.\n",
+                        "secret": true
                     },
                     "roles": {
                         "type": "array",
@@ -676,7 +749,7 @@
             }
         },
         "airflow:index/variable:Variable": {
-            "description": "Provides an Airflow variable.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"@pulumi/airflow\";\n\nconst example = new airflow.Variable(\"example\", {\n    key: \"example\",\n    value: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Variable(\"example\",\n    key=\"example\",\n    value=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Variable(\"example\", new()\n    {\n        Key = \"example\",\n        Value = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewVariable(ctx, \"example\", \u0026airflow.VariableArgs{\n\t\t\tKey:   pulumi.String(\"example\"),\n\t\t\tValue: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Variable;\nimport com.pulumi.airflow.VariableArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Variable(\"example\", VariableArgs.builder()        \n            .key(\"example\")\n            .value(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Variable\n    properties:\n      key: example\n      value: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nVariables can be imported using the variable key. terraform\n\n```sh\n $ pulumi import airflow:index/variable:Variable default example\n```\n\n ",
+            "description": "Provides an Airflow variable.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as airflow from \"pulumi-airflow\";\n\nconst example = new airflow.Variable(\"example\", {\n    key: \"example\",\n    value: \"example\",\n});\n```\n```python\nimport pulumi\nimport pulumi_airflow as airflow\n\nexample = airflow.Variable(\"example\",\n    key=\"example\",\n    value=\"example\")\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing Pulumi;\nusing Airflow = Pulumi.Airflow;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var example = new Airflow.Variable(\"example\", new()\n    {\n        Key = \"example\",\n        Value = \"example\",\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"github.com/Hellthrashers/pulumi-airflow/sdk/go/airflow\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\t_, err := airflow.NewVariable(ctx, \"example\", \u0026airflow.VariableArgs{\n\t\t\tKey:   pulumi.String(\"example\"),\n\t\t\tValue: pulumi.String(\"example\"),\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.airflow.Variable;\nimport com.pulumi.airflow.VariableArgs;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var example = new Variable(\"example\", VariableArgs.builder()        \n            .key(\"example\")\n            .value(\"example\")\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  example:\n    type: airflow:Variable\n    properties:\n      key: example\n      value: example\n```\n{{% /example %}}\n{{% /examples %}}\n\n## Import\n\nVariables can be imported using the variable key. terraform\n\n```sh\n $ pulumi import airflow:index/variable:Variable default example\n```\n\n ",
             "properties": {
                 "key": {
                     "type": "string",

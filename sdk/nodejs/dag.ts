@@ -13,7 +13,7 @@ import * as utilities from "./utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as airflow from "@pulumi/airflow";
+ * import * as airflow from "pulumi-airflow";
  *
  * const example = new airflow.Dag("example", {
  *     dagId: "example",

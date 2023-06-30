@@ -14,7 +14,7 @@ __all__ = ['ProviderArgs', 'Provider']
 @pulumi.input_type
 class ProviderArgs:
     def __init__(__self__, *,
-                 base_endpoint: pulumi.Input[str],
+                 base_endpoint: Optional[pulumi.Input[str]] = None,
                  disable_ssl_verification: Optional[pulumi.Input[bool]] = None,
                  oauth2_token: Optional[pulumi.Input[str]] = None,
                  password: Optional[pulumi.Input[str]] = None,
@@ -26,7 +26,8 @@ class ProviderArgs:
         :param pulumi.Input[str] password: The password to use for API basic authentication
         :param pulumi.Input[str] username: The username to use for API basic authentication
         """
-        pulumi.set(__self__, "base_endpoint", base_endpoint)
+        if base_endpoint is not None:
+            pulumi.set(__self__, "base_endpoint", base_endpoint)
         if disable_ssl_verification is not None:
             pulumi.set(__self__, "disable_ssl_verification", disable_ssl_verification)
         if oauth2_token is not None:
@@ -38,11 +39,11 @@ class ProviderArgs:
 
     @property
     @pulumi.getter(name="baseEndpoint")
-    def base_endpoint(self) -> pulumi.Input[str]:
+    def base_endpoint(self) -> Optional[pulumi.Input[str]]:
         return pulumi.get(self, "base_endpoint")
 
     @base_endpoint.setter
-    def base_endpoint(self, value: pulumi.Input[str]):
+    def base_endpoint(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "base_endpoint", value)
 
     @property
@@ -122,7 +123,7 @@ class Provider(pulumi.ProviderResource):
     @overload
     def __init__(__self__,
                  resource_name: str,
-                 args: ProviderArgs,
+                 args: Optional[ProviderArgs] = None,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         The provider type for the airflow package. By default, resources use package-wide configuration
@@ -159,13 +160,13 @@ class Provider(pulumi.ProviderResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
-            if base_endpoint is None and not opts.urn:
-                raise TypeError("Missing required property 'base_endpoint'")
             __props__.__dict__["base_endpoint"] = base_endpoint
             __props__.__dict__["disable_ssl_verification"] = pulumi.Output.from_input(disable_ssl_verification).apply(pulumi.runtime.to_json) if disable_ssl_verification is not None else None
-            __props__.__dict__["oauth2_token"] = oauth2_token
-            __props__.__dict__["password"] = password
+            __props__.__dict__["oauth2_token"] = None if oauth2_token is None else pulumi.Output.secret(oauth2_token)
+            __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
             __props__.__dict__["username"] = username
+        secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["oauth2Token", "password"])
+        opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Provider, __self__).__init__(
             'airflow',
             resource_name,
@@ -174,7 +175,7 @@ class Provider(pulumi.ProviderResource):
 
     @property
     @pulumi.getter(name="baseEndpoint")
-    def base_endpoint(self) -> pulumi.Output[str]:
+    def base_endpoint(self) -> pulumi.Output[Optional[str]]:
         return pulumi.get(self, "base_endpoint")
 
     @property
