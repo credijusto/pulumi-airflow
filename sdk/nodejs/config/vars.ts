@@ -10,7 +10,7 @@ const __config = new pulumi.Config("airflow");
 export declare const baseEndpoint: string | undefined;
 Object.defineProperty(exports, "baseEndpoint", {
     get() {
-        return __config.get("baseEndpoint");
+        return __config.get("baseEndpoint") ?? utilities.getEnv("AIRFLOW_BASE_ENDPOINT");
     },
     enumerable: true,
 });

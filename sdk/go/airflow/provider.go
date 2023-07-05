@@ -33,6 +33,11 @@ func NewProvider(ctx *pulumi.Context,
 		args = &ProviderArgs{}
 	}
 
+	if args.BaseEndpoint == nil {
+		if d := getEnvOrDefault(nil, nil, "AIRFLOW_BASE_ENDPOINT"); d != nil {
+			args.BaseEndpoint = pulumi.StringPtr(d.(string))
+		}
+	}
 	if args.Oauth2Token != nil {
 		args.Oauth2Token = pulumi.ToSecret(args.Oauth2Token).(pulumi.StringPtrInput)
 	}
